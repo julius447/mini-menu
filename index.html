@@ -12,6 +12,7 @@
 /* ===== Ampy canonical tokens (values match ampy-design-system/reference/tokens.css) ===== */
 :root{
   --ap-navy:#090b32; --ap-teal:#00a991; --ap-teal-bright:#1cc4af; --ap-green:#39c281; --ap-mint:#55ff9a;
+  --ap-blue:#326afd; --ap-blue-bright:#4b85fd;   /* Ampy brand blue (brandbook primary) — the CTA "ljusblå" */
   --ap-offwhite:#f5f9ff; --ap-white:#ffffff;
   --ink:#0f123c; --ink-muted:#565e82;
   --font:"Outfit",system-ui,-apple-system,sans-serif;
@@ -27,6 +28,7 @@
   --shadow-card:0 1.6rem 4rem -1.2rem rgba(9,11,50,0.28),0 0.4rem 1rem -0.4rem rgba(9,11,50,0.18);
   --shadow-card-h:0 3rem 6rem -1.4rem rgba(9,11,50,0.38),0 1rem 2rem -0.6rem rgba(9,11,50,0.22);
   --shadow-teal:0 1rem 2.4rem -0.6rem rgba(0,169,145,0.45);
+  --shadow-blue:0 1rem 2.4rem -0.6rem rgba(50,106,253,0.5);
   --ring:0 0 0 0.3rem rgba(0,169,145,0.5);
   --ease:cubic-bezier(0.2,0.6,0.2,1); --ease-out:cubic-bezier(0.16,1,0.3,1);
 }
@@ -101,16 +103,16 @@ img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
 /* the CTA pill — kept from Evify, recoloured to Ampy teal ("Ampy-friendly light-blue") */
 .pcard__cta{display:inline-flex;align-items:center;gap:var(--s-2);
   padding:1.5rem 3.2rem;border-radius:var(--r-pill);
-  background:var(--ap-teal);color:var(--ap-white);
+  background:var(--ap-blue);color:var(--ap-white);
   font-size:var(--fs-sm);font-weight:var(--w-semi);letter-spacing:0.01em;
-  box-shadow:var(--shadow-teal);
+  box-shadow:var(--shadow-blue);
   transition:background 200ms var(--ease),transform 200ms var(--ease-out),box-shadow 200ms var(--ease);}
 .pcard__cta svg{width:1.7rem;height:1.7rem;fill:none;stroke:currentColor;stroke-width:2.2;
   stroke-linecap:round;stroke-linejoin:round;
   transition:transform 200ms var(--ease-out);}
 .pcard:hover .pcard__cta,.pcard:focus-visible .pcard__cta{
-  background:var(--ap-teal-bright);transform:translateY(-0.2rem);
-  box-shadow:0 1.4rem 3rem -0.6rem rgba(28,196,175,0.6);}
+  background:var(--ap-blue-bright);transform:translateY(-0.2rem);
+  box-shadow:0 1.4rem 3rem -0.6rem rgba(75,133,253,0.6);}
 .pcard:hover .pcard__cta svg,.pcard:focus-visible .pcard__cta svg{transform:translateX(0.3rem);}
 
 /* quiet load stagger */
@@ -140,7 +142,7 @@ img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
 
       <!-- Ruta 1 — Elservice  (bild 1: det upplysta huset i skymning) -->
       <a class="pcard pcard--elservice rise d3" href="/elservice/">
-        <span class="pcard__media"><img src="img/elservice.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        <span class="pcard__media"><img src="img/elservice.webp" alt="" loading="lazy" onerror="this.style.display='none'"></span>
         <span class="pcard__overlay"></span>
         <span class="pcard__body">
           <span class="pcard__title">Elservice</span>
@@ -150,7 +152,7 @@ img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
 
       <!-- Ruta 2 — Laddbox  (bild 3: laddaren på träpanelen) -->
       <a class="pcard pcard--laddbox rise d4" href="/laddboxar/">
-        <span class="pcard__media"><img src="img/laddbox.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        <span class="pcard__media"><img src="img/laddbox.webp" alt="" loading="lazy" onerror="this.style.display='none'"></span>
         <span class="pcard__overlay"></span>
         <span class="pcard__body">
           <span class="pcard__title">Laddbox</span>
@@ -160,7 +162,7 @@ img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
 
       <!-- Ruta 3 — Batterilagring  (bild 2: trähuset med solceller) -->
       <a class="pcard pcard--batteri rise d5" href="/batterilagring/">
-        <span class="pcard__media"><img src="img/batterilagring.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        <span class="pcard__media"><img src="img/batterilagring.webp" alt="" loading="lazy" onerror="this.style.display='none'"></span>
         <span class="pcard__overlay"></span>
         <span class="pcard__body">
           <span class="pcard__title">Batterilagring</span>
