@@ -1,38 +1,47 @@
 # Ampy — "En leverantör" (block 2)
 
-Homepage product-picker that sits directly under Hero 1. **Evify layout** (centred header + three
-equal square tiles, same 30px gutters) × **Hemsol interaction** (whole tile clickable, media zooms on
-hover, a small arrow that grows into a "Se …" button) × **Ampy quality** (real `ap*` tokens, Outfit,
-midnight + teal + aurora, candour-clean voice).
+Homepage product-picker + **conversion engine** for warm/returning visitors. **Evify layout** ×
+**Hemsol interaction** × **Ampy quality**, elevated by a 6-designer critique panel into an asymmetric,
+material, converting block.
 
 ## Live preview
 - **The Ampy block:** [`index.html`](index.html) → https://julius447.github.io/mini-menu/
 - **1:1 Evify reference clone:** [`evify-clone.html`](evify-clone.html)
-- **Ampy v1 (light glass cards, superseded):** [`prototype.html`](prototype.html)
+- **Earlier Ampy versions:** [`prototype.html`](prototype.html) (v1 glass), git history (v2 midnight tiles)
 
-## The interaction (what you asked for)
-- **Default:** each tile shows its label (Elservice · Laddbox · Batteri) + a small arrow chip — the "liten
-  pil" that signals it's clickable.
-- **Hover / keyboard focus:** the whole tile lifts, the media plate zooms (Hemsol), the scrim deepens, and
-  the arrow chip **grows into a white pill** — "Se elservice →" / "Se laddboxar →" / "Se batterier →".
-  No persistent "Läs mer", no "Köp"; the CTA is revealed, not shouted.
-- One signature device, done well. Verified desktop + mobile, hover + focus, reduced-motion + forced-colors.
-
-## Ampy quality (vs the Evify clone)
-- **Tokens:** teal `#00a991`, midnight `#090b32`, Outfit, the aurora surface. No Evify blue, no Montserrat.
-- **Voice (candour gate):** the Evify hype does **not** carry over. No "över 20 000 installationer", no
-  "är bäst", no invented number, no superlative, no "!". The lead sells scope honestly instead.
-- **A11y:** semantic `<ul>/<li>`, whole-tile link, focus parity with hover, AA contrast, forced-colors
+## What makes it a masterpiece + conversion engine
+- **Asymmetric hierarchy** — Elservice leads as a large hero tile, Laddbox + Batteri stack beside it.
+  The layout encodes the commercial priority (service > laddbox > battery), so the eye has a focal path.
+- **Premium material** — the midnight plates carry real depth: overhead light-gradient, corner vignette,
+  fine grain (kills banding), a top rim-light hairline, a grounded navy shadow, teal temperature between
+  the three. They read as designed art-plates, not empty placeholders.
+- **Signature motion** — a teal glow that tracks the cursor across each tile (pointer-driven, rAF-throttled,
+  disabled under reduced-motion & touch), plus the media zoom, scrim-deepen, and the arrow-chip that grows
+  into a white "Se … →" pill. One wow, done well — no 3D tilt, no idle animation, no bounce.
+- **Conversion band** — below the trio: *"Osäker på vad du behöver? Beskriv jobbet, så återkommer en behörig
+  elektriker med ett fast pris."* + **Få offert** (primary) + **Ring 010-265 79 79**. The undecided warm
+  visitor now has a committing next step, not just three lateral doors.
+- **Honest trust row** — behöriga egna elektriker · fast pris innan vi börjar · ROT draget direkt · svar
+  oftast inom en arbetsdag. All provenance-backed; the candour-clean substitute for the banned "20 000
+  installationer / 5.0" proof.
+- **Type** — teal eyebrow, display leading 1.06, `text-wrap:balance`, tile sub-lines, tuned tracking.
+- **Mobile** — hero stays largest; the CTA pill is **persistent** (never hover-gated); backdrop-blur and
+  `will-change` dropped on touch; safe-area padding; lighter title wrap.
+- **A11y** — semantic `<ul>/<li>`, whole-tile links, focus parity with hover, AA contrast, forced-colors
   outline, reduced-motion safe.
 
+## Candour gate (held)
+No "20 000 installationer", no "är bäst", no ratings, no urgency/scarcity, no invented numbers, no "hela
+Sverige". Teal is the only accent; green/mint live only in the aurora. Battery copy is self-consumption /
+"vi räknar hederligt" — survives stödtjänster=0 AND effektavgift=0.
+
 ## Open `[GAP]` before go-live
-1. **Photos.** The tiles currently use on-brand **midnight-aurora plates** (a `.tile__media` gradient layer)
-   as placeholders — Ampy has no rights-cleared install-photo library yet. Supply three rights-cleared
-   photos (elservice / laddbox / batteri) and swap the `.tile__media` span for `<img class="tile__media">`;
-   the zoom + scrim already work.
-2. **URLs:** `/elservice/` (parent landing unconfirmed — `/elservice/elcentral/` + `/elinstallation/` exist),
-   `/laddboxar/` (live URL is `/laddbox/` singular), `/batterilagring/` (verified live; or `/solcellsbatterier/`
-   for the comparison hub — confirm which the "Batteri" tile should point to).
-3. **Copy sign-off:** header "En leverantör, oavsett vad hemmet behöver." + the lead, and the tile CTAs.
+1. **Photos.** Tiles use on-brand midnight-aurora plates as placeholders (the `.tile__media` span). Supply
+   three rights-cleared photos (elservice / laddbox / batteri); swap the span for `<img class="tile__media">`
+   — the zoom, scrim, and glow already work.
+2. **URLs:** `/offert/` (confirm the offert route), `/elservice/`, `/laddboxar/` (live is `/laddbox/`),
+   `/batterilagring/` (or `/solcellsbatterier/`). Phone `010-265 79 79` is verified [FACT].
+3. **Copy sign-off:** eyebrow "Hela hemmets el", header, tile sub-lines, trust row, and the CTA-band line.
+4. **Instrumentation** (optional): consent-gated funnel `block_view → tile_select → cta_click → lead`.
 
 *Reference studied: `Picasso/components/mini-menu` (Evify + Hemsol). Ampy tokens, Ampy voice, candour gate.*
