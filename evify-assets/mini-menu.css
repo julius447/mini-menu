@@ -28,11 +28,13 @@
 /* Font-weight utilities (500) */
 .w-500{font-weight:500}
 
-/* Product-card container  (position:relative anchors the overlay) */
-.product-category-container{width:100%;background-color:#f9f7fd;height:auto;position:relative}
+/* Product-card container  (position:relative anchors the overlay)
+   NOTE: border-radius + overflow were MISSING from the first base.css extract;
+   recovered by matching the live evify.se block (rounded cards, image clipped). */
+.product-category-container{width:100%;background-color:#f9f7fd;height:auto;position:relative;border-radius:20px;overflow:hidden}
 
 /* Product-card image */
-.product-category-img{position:relative;width:100%;height:auto}
+.product-category-img{position:relative;width:100%;height:auto;border-radius:20px}
 
 /* Text overlay  (centered over the image) */
 .product-category-text-container{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);color:#fff;text-align:center;width:100%;z-index:100}
