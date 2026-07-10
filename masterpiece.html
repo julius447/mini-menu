@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ampy — "En leverantör" (block 2) · masterpiece</title>
+<!-- Prototype only: production self-hosts Outfit (no Google Fonts request). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Ampy canonical tokens (values match ampy-design-system/reference/tokens.css) ===== */
+:root{
+  --ap-navy:#090b32; --ap-navy-2:#0d1145; --ap-teal:#00a991; --ap-teal-bright:#1cc4af;
+  --ap-green:#39c281; --ap-mint:#55ff9a; --ap-offwhite:#f5f9ff; --ap-white:#ffffff;
+  --bg-page:var(--ap-offwhite); --bg-surface:var(--ap-white);
+  --ink:#0f123c; --ink-muted:#565e82; --ink-faint:#8a90ac;
+  --on-dark:rgba(255,255,255,0.96); --on-dark-muted:rgba(255,255,255,0.70);
+  --on-dark-line:rgba(255,255,255,0.12);
+  --font:"Outfit",system-ui,-apple-system,sans-serif;
+  --w-light:300; --w-reg:400; --w-med:500; --w-semi:600; --w-bold:700; --w-black:800;
+  --fs-eyebrow:clamp(1.2rem,1.1rem + 0.2vw,1.35rem);
+  --fs-sm:clamp(1.4rem,1.3rem + 0.3vw,1.6rem);
+  --fs-body:clamp(1.6rem,1.5rem + 0.4vw,1.9rem);
+  --fs-lead:clamp(1.9rem,1.7rem + 0.6vw,2.3rem);
+  --fs-h3:clamp(2.2rem,1.9rem + 0.9vw,2.8rem);
+  --fs-h2:clamp(3.0rem,2.4rem + 1.8vw,4.4rem);
+  --lh-tight:1.04; --lh-display:1.06; --lh-snug:1.18; --lh-body:1.6;
+  --tr-tight:-0.022em; --tr-display:-0.028em; --tr-eyebrow:0.16em;
+  --s-1:0.4rem; --s-2:0.8rem; --s-3:1.2rem; --s-4:1.6rem; --s-5:2.4rem;
+  --s-6:3.2rem; --s-7:4.8rem; --s-8:6.4rem; --s-9:9.6rem; --s-10:13rem;
+  --measure:56rem;
+  --r-sm:0.8rem; --r-md:1.4rem; --r-lg:2.2rem; --r-xl:3.2rem; --r-pill:999rem;
+  --shadow-teal:0 1.2rem 3rem -0.8rem rgba(0,169,145,0.45);
+  --ring:0 0 0 0.3rem rgba(0,169,145,0.28);
+  --fast:140ms; --normal:280ms; --slow:520ms;
+  --ease:cubic-bezier(0.2,0.6,0.2,1); --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+@media (prefers-reduced-motion:reduce){ *{animation:none !important; transition:none !important;} }
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:62.5%;-webkit-text-size-adjust:100%;}
+body{font-family:var(--font);font-weight:var(--w-reg);font-size:var(--fs-body);
+  line-height:var(--lh-body);color:var(--ink);
+  font-feature-settings:"kern" 1,"liga" 1;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  /* faint cool stage so the dark tiles sit in a pool of light, not dropped on flat white */
+  background:radial-gradient(90rem 46rem at 50% -6%,#ffffff 0%,var(--ap-offwhite) 60%),var(--ap-offwhite);}
+svg{display:block;} a{color:inherit;text-decoration:none;}
+::selection{background:rgba(0,169,145,0.22);}
+
+/* ============================================================================
+   BLOCK 2 — "En leverantör" (Evify layout · Hemsol interaction · Ampy quality)
+   ============================================================================ */
+.amp2{padding-block:clamp(var(--s-8),4rem + 6vw,12rem);}
+.amp2__wrap{width:100%;max-width:120rem;
+  margin-inline:auto;padding-inline:max(var(--s-5),env(safe-area-inset-left));}
+
+/* — centred header — */
+.amp2__head{max-width:66rem;margin-inline:auto;text-align:center;}
+.amp2__eyebrow{display:inline-flex;align-items:center;gap:var(--s-2);
+  font-size:var(--fs-eyebrow);font-weight:var(--w-semi);letter-spacing:var(--tr-eyebrow);
+  text-transform:uppercase;color:var(--ap-teal);}
+.amp2__eyebrow::before{content:"";width:2.4rem;height:0.2rem;border-radius:2px;background:var(--ap-teal);}
+.amp2__title{margin-top:var(--s-4);font-size:var(--fs-h2);font-weight:var(--w-black);
+  line-height:var(--lh-display);letter-spacing:var(--tr-display);color:var(--ink);text-wrap:balance;}
+.amp2__lead{margin:var(--s-4) auto 0;max-width:48ch;font-size:var(--fs-lead);
+  font-weight:var(--w-reg);line-height:1.45;color:var(--ink-muted);text-wrap:pretty;}
+
+/* — honest trust row (candour-clean, provenance-backed) — */
+.amp2__trust{list-style:none;margin:var(--s-5) auto 0;padding:0;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s-3) var(--s-5);max-width:76rem;}
+.amp2__trust li{display:inline-flex;align-items:center;gap:var(--s-2);
+  font-size:var(--fs-sm);font-weight:var(--w-med);color:var(--ink-muted);}
+.amp2__trust li::before{content:"";width:1.7rem;height:1.7rem;flex:0 0 auto;
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300a991' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");}
+
+/* — asymmetric grid: Elservice leads (service > laddbox > battery) — */
+.amp2__grid{list-style:none;margin:clamp(var(--s-7),3rem + 2vw,6rem) 0 0;padding:0;
+  display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:1fr 1fr;gap:var(--s-4);
+  min-height:clamp(44rem,30rem + 20vw,58rem);}
+.amp2__grid > li{display:flex;min-width:0;min-height:0;}
+.amp2__grid > li.is-hero{grid-column:1;grid-row:1 / 3;}
+
+/* — the tile (whole tile is the link) — */
+.tile{position:relative;width:100%;display:block;overflow:hidden;
+  border-radius:var(--r-lg);background:var(--ap-navy);
+  transform:translateZ(0);
+  box-shadow:
+    0 0.2rem 0.5rem rgba(9,11,50,0.14),
+    0 1.4rem 2.8rem -0.8rem rgba(9,11,50,0.26),
+    inset 0 0.1rem 0 rgba(255,255,255,0.10),
+    inset 0 0 0 0.1rem rgba(255,255,255,0.05);
+  transition:transform 380ms var(--ease-back),box-shadow var(--normal) var(--ease);
+  isolation:isolate;}
+.tile:hover,.tile:focus-visible{transform:translateY(-0.6rem);outline:0;
+  box-shadow:
+    0 2.6rem 5.2rem -1rem rgba(9,11,50,0.32),
+    var(--shadow-teal),
+    inset 0 0.1rem 0 rgba(28,196,175,0.42),
+    inset 0 0 0 0.1rem rgba(255,255,255,0.06);}
+.tile:focus-visible{box-shadow:var(--ring),0 2.6rem 5.2rem -1rem rgba(9,11,50,0.32),var(--shadow-teal);}
+.tile:active{transform:translateY(-0.2rem);transition-duration:var(--fast);}
+
+/* the "photo" plate — SWAP for a real <img class="tile__media"> when Ampy supplies
+   rights-cleared install photos. Layers (top→bottom): vignette · sheen · aurora · base-light. */
+.tile__media{position:absolute;inset:0;z-index:0;border-radius:inherit;
+  transform:scale(1);transform-origin:center;transition:transform var(--slow) var(--ease-out),filter var(--normal) var(--ease);}
+.tile:hover .tile__media,.tile:focus-visible .tile__media{transform:scale(1.055);filter:brightness(1.05) saturate(1.04);}
+.tile--elservice .tile__media{background:
+  radial-gradient(130% 118% at 50% 22%,transparent 50%,rgba(4,5,22,0.55) 100%),
+  linear-gradient(118deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0) 28%),
+  radial-gradient(64rem 46rem at 80% 12%,rgba(0,169,145,0.44),transparent 60%),
+  radial-gradient(42rem 32rem at 6% 94%,rgba(57,194,129,0.22),transparent 60%),
+  linear-gradient(180deg,#0d1350 0%,#090b32 60%,#06082a 100%);}
+.tile--laddbox .tile__media{background:
+  radial-gradient(130% 118% at 50% 22%,transparent 50%,rgba(4,5,22,0.55) 100%),
+  linear-gradient(118deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0) 28%),
+  radial-gradient(52rem 40rem at 78% 86%,rgba(57,194,129,0.40),transparent 60%),
+  radial-gradient(38rem 30rem at 14% 8%,rgba(0,169,145,0.32),transparent 60%),
+  linear-gradient(180deg,#0d1145 0%,#090b32 60%,#06082a 100%);}
+.tile--batteri .tile__media{background:
+  radial-gradient(130% 118% at 50% 22%,transparent 50%,rgba(4,5,22,0.55) 100%),
+  linear-gradient(118deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0) 28%),
+  radial-gradient(50rem 40rem at 18% 16%,rgba(0,169,145,0.38),transparent 60%),
+  radial-gradient(44rem 34rem at 92% 96%,rgba(85,255,154,0.18),transparent 60%),
+  linear-gradient(180deg,#0b0e38 0%,#080a2e 60%,#05061f 100%);}
+
+/* fine grain = material tooth, kills gradient banding (static, doesn't zoom) */
+.tile::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0.05;
+  mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px;}
+
+/* pointer-tracked teal glow — the signature moment (JS sets --mx/--my; no transition on position) */
+.tile__glow{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;
+  mix-blend-mode:screen;
+  background:radial-gradient(24rem 24rem at var(--mx,50%) var(--my,28%),rgba(28,196,175,0.22),transparent 62%);
+  transition:opacity var(--normal) var(--ease);}
+.tile:hover .tile__glow,.tile:focus-visible .tile__glow{opacity:1;}
+
+/* large glyph = the tile's identity (white line, subtle, faint teal edge-glow) */
+.tile__glyph{position:absolute;z-index:3;right:4%;top:9%;width:52%;height:auto;
+  color:var(--ap-white);opacity:0.13;pointer-events:none;
+  filter:drop-shadow(0 0 1.4rem rgba(0,169,145,0.18));
+  transition:opacity var(--slow) var(--ease),transform var(--slow) var(--ease-out);}
+.tile__glyph svg{width:100%;height:auto;fill:none;stroke:currentColor;stroke-width:1;
+  stroke-linecap:round;stroke-linejoin:round;}
+.tile.is-hero .tile__glyph{width:44%;right:6%;top:11%;}
+.tile:hover .tile__glyph,.tile:focus-visible .tile__glyph{opacity:0.2;transform:scale(1.04);}
+
+/* scrim for text legibility (deepens on hover) */
+.tile__scrim{position:absolute;inset:0;z-index:4;opacity:0.92;
+  background:linear-gradient(to top,rgba(6,8,26,0.95) 0%,rgba(9,11,50,0.72) 22%,rgba(9,11,50,0.34) 46%,rgba(9,11,50,0) 66%);
+  transition:opacity var(--normal) var(--ease);}
+.tile:hover .tile__scrim,.tile:focus-visible .tile__scrim{opacity:1;}
+
+/* bottom-left content */
+.tile__content{position:absolute;z-index:5;inset:auto 0 0 0;
+  display:flex;flex-direction:column;align-items:flex-start;
+  padding:clamp(var(--s-5),1.4rem + 1.6vw,3.2rem);}
+.tile__label{font-size:var(--fs-h3);font-weight:var(--w-bold);line-height:1.05;
+  letter-spacing:-0.012em;color:var(--on-dark);
+  transition:transform var(--fast) var(--ease-out);}
+.tile.is-hero .tile__label{font-size:clamp(2.6rem,2rem + 1.6vw,3.6rem);}
+.tile__sub{margin-top:var(--s-2);max-width:34ch;font-size:var(--fs-sm);font-weight:var(--w-light);
+  line-height:1.4;color:var(--on-dark-muted);}
+.tile:hover .tile__label,.tile:focus-visible .tile__label{transform:translateY(-0.2rem);}
+
+/* the reveal: default = a small arrow chip; hover = a white pill "Se …" grows out */
+.tile__cta{margin-top:var(--s-5);display:inline-flex;align-items:center;height:4.4rem;overflow:hidden;
+  border-radius:var(--r-pill);background:rgba(255,255,255,0.20);color:var(--on-dark);
+  box-shadow:inset 0 0 0 0.1rem rgba(255,255,255,0.34);
+  transition:background var(--normal) var(--ease),box-shadow var(--normal) var(--ease),padding var(--normal) var(--ease);}
+.tile__ctatext{max-width:0;opacity:0;white-space:nowrap;font-size:var(--fs-sm);font-weight:var(--w-semi);
+  letter-spacing:0.01em;
+  transition:max-width var(--normal) var(--ease-out),opacity var(--fast) var(--ease),margin var(--normal) var(--ease);}
+.tile__arrow{flex:0 0 auto;width:4.4rem;height:4.4rem;display:grid;place-items:center;
+  transition:color var(--normal) var(--ease),transform var(--normal) var(--ease-out);}
+.tile__arrow svg{width:2rem;height:2rem;fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;}
+.tile:hover .tile__cta,.tile:focus-visible .tile__cta{
+  background:var(--ap-white);color:var(--ap-navy);padding-left:2rem;
+  box-shadow:inset 0 0 0 0.1rem transparent,0 0.6rem 1.6rem -0.4rem rgba(9,11,50,0.3);}
+.tile:hover .tile__ctatext,.tile:focus-visible .tile__ctatext{max-width:18rem;opacity:1;margin-right:0.4rem;}
+.tile:hover .tile__arrow,.tile:focus-visible .tile__arrow{color:var(--ap-teal);transform:translateX(0.3rem);transition-delay:40ms;}
+
+/* — primary conversion band (the engine) — */
+.amp2__cta{margin-top:clamp(var(--s-7),3rem + 2vw,var(--s-8));
+  display:flex;flex-direction:column;align-items:center;gap:var(--s-5);text-align:center;}
+.amp2__cta-text{max-width:46ch;font-size:var(--fs-body);color:var(--ink-muted);}
+.amp2__cta-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:var(--s-4) var(--s-5);}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s-2);
+  font-family:var(--font);font-size:var(--fs-sm);font-weight:var(--w-semi);
+  padding:1.6rem 3rem;border-radius:var(--r-pill);border:0;cursor:pointer;text-decoration:none;
+  transition:transform var(--fast) var(--ease),box-shadow var(--fast) var(--ease),background var(--fast),color var(--fast);}
+.btn--primary{background:var(--ap-teal);color:var(--ap-white);box-shadow:var(--shadow-teal);}
+.btn--primary:hover{background:var(--ap-teal-bright);transform:translateY(-0.2rem);
+  box-shadow:0 1.8rem 3.6rem -0.8rem rgba(0,169,145,0.55);}
+.btn--phone{color:var(--ink);font-weight:var(--w-med);}
+.btn--phone strong{font-weight:var(--w-semi);}
+.btn--phone:hover{color:var(--ap-teal);}
+.btn:focus-visible{outline:0;box-shadow:var(--ring);}
+
+/* quiet fade-up on load (top → bottom stagger) */
+@keyframes amp2-rise{from{opacity:0;transform:translateY(1.6rem);}to{opacity:1;transform:none;}}
+.rise{animation:amp2-rise var(--slow) var(--ease-out) both;}
+.rise.d1{animation-delay:.05s;} .rise.d2{animation-delay:.12s;} .rise.d3{animation-delay:.20s;}
+.rise.d4{animation-delay:.28s;} .rise.d5{animation-delay:.36s;} .rise.d6{animation-delay:.44s;}
+
+/* ============================================================================
+   responsive
+   ============================================================================ */
+@media (max-width:860px){
+  .amp2__grid{grid-template-columns:1fr;grid-template-rows:none;min-height:0;gap:var(--s-4);
+    margin-top:var(--s-7);}
+  .amp2__grid > li.is-hero{grid-column:auto;grid-row:auto;}
+  .tile{aspect-ratio:16/10;}
+  .tile.is-hero{aspect-ratio:4/3;}
+  .tile.is-hero .tile__glyph{width:40%;}
+}
+/* touch / mobile: no hover — make the CTA + affordances PERSISTENT (never hover-gated) */
+@media (hover:none),(max-width:860px){
+  .tile__ctatext{max-width:18rem;opacity:1;margin-right:0.4rem;}
+  .tile__cta{background:var(--ap-white);color:var(--ap-navy);padding-left:2rem;
+    box-shadow:0 0.6rem 1.6rem -0.4rem rgba(9,11,50,0.3);}
+  .tile__arrow{color:var(--ap-teal);}
+}
+@media (hover:none){
+  .tile__media{will-change:auto;} /* drop the unreachable hover-zoom promotion on touch */
+}
+@media (max-width:560px){
+  .tile__sub{display:none;} /* keep small tiles clean; label + CTA carry it */
+  .amp2__trust{gap:var(--s-2) var(--s-4);}
+  .amp2__cta-actions{flex-direction:column;gap:var(--s-4);}
+}
+@media (forced-colors:active){
+  .tile:focus-visible{outline:0.2rem solid;outline-offset:0.2rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== BLOCK 2 — "En leverantör" ===== -->
+<section class="amp2" aria-labelledby="amp2-title">
+  <div class="amp2__wrap">
+
+    <header class="amp2__head">
+      <span class="amp2__eyebrow rise d1">Hela hemmets el</span>
+      <h2 class="amp2__title rise d1" id="amp2-title">En leverantör, oavsett vad hemmet behöver.</h2>
+      <p class="amp2__lead rise d2">Elservice, laddbox eller batteri. Våra behöriga elektriker tar hand om hela jobbet, från första kontakt till färdig installation.</p>
+      <ul class="amp2__trust rise d3">
+        <li>Behöriga, egna elektriker</li>
+        <li>Fast pris innan vi börjar</li>
+        <li>ROT draget direkt</li>
+        <li>Svar oftast inom en arbetsdag</li>
+      </ul>
+    </header>
+
+    <ul class="amp2__grid">
+
+      <!-- Elservice (hero) -->
+      <li class="is-hero rise d3">
+        <a class="tile is-hero tile--elservice" href="/elservice/">
+          <span class="tile__media"></span>
+          <span class="tile__glow"></span>
+          <span class="tile__glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 4 L7.5 13 h3.3 l-1 7 6.2-10 h-3.3 z"/></svg></span>
+          <span class="tile__scrim"></span>
+          <span class="tile__content">
+            <span class="tile__label">Elservice</span>
+            <span class="tile__sub">Felsökning, installation och byte av elcentral.</span>
+            <span class="tile__cta">
+              <span class="tile__ctatext">Se elservice</span>
+              <span class="tile__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </span>
+        </a>
+      </li>
+
+      <!-- Laddbox -->
+      <li class="rise d4">
+        <a class="tile tile--laddbox" href="/laddboxar/">
+          <span class="tile__media"></span>
+          <span class="tile__glow"></span>
+          <span class="tile__glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M13 7 L10 12.5 h2.4 l-0.8 4.5 4-6 h-2.4 z"/></svg></span>
+          <span class="tile__scrim"></span>
+          <span class="tile__content">
+            <span class="tile__label">Laddbox</span>
+            <span class="tile__sub">Rådgivning, montering och driftklar laddning.</span>
+            <span class="tile__cta">
+              <span class="tile__ctatext">Se laddboxar</span>
+              <span class="tile__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </span>
+        </a>
+      </li>
+
+      <!-- Batteri -->
+      <li class="rise d5">
+        <a class="tile tile--batteri" href="/batterilagring/">
+          <span class="tile__media"></span>
+          <span class="tile__glow"></span>
+          <span class="tile__glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="16" height="11" rx="2.2"/><path d="M19 10.5 h2 v4 h-2"/><path d="M10.8 9 L8 13 h2.2 l-0.7 3.4 3.4-4.4 h-2.2 z"/></svg></span>
+          <span class="tile__scrim"></span>
+          <span class="tile__content">
+            <span class="tile__label">Batteri</span>
+            <span class="tile__sub">Se om ett batteri lönar sig, vi räknar hederligt.</span>
+            <span class="tile__cta">
+              <span class="tile__ctatext">Se batterier</span>
+              <span class="tile__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </span>
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- primary conversion band -->
+    <div class="amp2__cta rise d6">
+      <p class="amp2__cta-text">Osäker på vad du behöver? Beskriv jobbet, så återkommer en behörig elektriker med ett fast pris.</p>
+      <div class="amp2__cta-actions">
+        <a class="btn btn--primary" href="/offert/">Få offert</a>
+        <a class="btn btn--phone" href="tel:+46102657979">Eller ring <strong>010-265 79 79</strong></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+/* pointer-tracked glow: sets --mx/--my per tile. Guarded off for reduced-motion & touch. */
+(function(){
+  try{
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if(matchMedia('(hover: none)').matches) return;
+    document.querySelectorAll('.tile').forEach(function(t){
+      var raf=null, mx='50%', my='28%';
+      t.addEventListener('pointermove', function(e){
+        var r=t.getBoundingClientRect();
+        mx=(((e.clientX-r.left)/r.width)*100).toFixed(1)+'%';
+        my=(((e.clientY-r.top)/r.height)*100).toFixed(1)+'%';
+        if(raf) return;
+        raf=requestAnimationFrame(function(){
+          t.style.setProperty('--mx',mx); t.style.setProperty('--my',my); raf=null;
+        });
+      });
+    });
+  }catch(e){}
+})();
+</script>
+
+</body>
+</html>
