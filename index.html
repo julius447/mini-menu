@@ -1,88 +1,176 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Evify — "En leverantör, oavsett dina behov" (1:1 klon / referens)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ampy — "En elfirma för hela hemmet" (Evify-layout · Hemsol-hover)</title>
+<!-- Prototype only: production self-hosts Outfit (no Google Fonts request). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Ampy canonical tokens (values match ampy-design-system/reference/tokens.css) ===== */
+:root{
+  --ap-navy:#090b32; --ap-teal:#00a991; --ap-teal-bright:#1cc4af; --ap-green:#39c281; --ap-mint:#55ff9a;
+  --ap-offwhite:#f5f9ff; --ap-white:#ffffff;
+  --ink:#0f123c; --ink-muted:#565e82;
+  --font:"Outfit",system-ui,-apple-system,sans-serif;
+  --w-light:300; --w-reg:400; --w-med:500; --w-semi:600; --w-bold:700; --w-black:800;
+  --fs-sm:clamp(1.4rem,1.3rem + 0.3vw,1.6rem);
+  --fs-body:clamp(1.6rem,1.5rem + 0.4vw,1.9rem);
+  --fs-lead:clamp(1.9rem,1.7rem + 0.6vw,2.3rem);
+  --fs-cardtitle:clamp(2.2rem,1.8rem + 1vw,3rem);
+  --fs-h2:clamp(3.0rem,2.4rem + 1.8vw,4.2rem);
+  --lh-snug:1.14; --tr-tight:-0.022em;
+  --s-2:0.8rem; --s-3:1.2rem; --s-4:1.6rem; --s-5:2.4rem; --s-6:3.2rem; --s-7:4.8rem; --s-8:6.4rem;
+  --r-lg:2rem; --r-pill:999rem;
+  --shadow-card:0 1.6rem 4rem -1.2rem rgba(9,11,50,0.28),0 0.4rem 1rem -0.4rem rgba(9,11,50,0.18);
+  --shadow-card-h:0 3rem 6rem -1.4rem rgba(9,11,50,0.38),0 1rem 2rem -0.6rem rgba(9,11,50,0.22);
+  --shadow-teal:0 1rem 2.4rem -0.6rem rgba(0,169,145,0.45);
+  --ring:0 0 0 0.3rem rgba(0,169,145,0.5);
+  --ease:cubic-bezier(0.2,0.6,0.2,1); --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+@media (prefers-reduced-motion:reduce){ *{animation:none !important; transition:none !important;} }
 
-  <!-- Evify's font: Montserrat -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:62.5%;-webkit-text-size-adjust:100%;}
+body{font-family:var(--font);font-weight:var(--w-reg);font-size:var(--fs-body);line-height:1.6;
+  color:var(--ink);background:var(--ap-offwhite);
+  font-feature-settings:"kern" 1,"liga" 1;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
+::selection{background:rgba(0,169,145,0.22);}
 
-  <!-- Bootstrap 4 grid (verbatim, the same file Evify ships) -->
-  <link rel="stylesheet" href="evify-assets/bootstrap.min.css">
-  <!-- Evify's real CSS, extracted verbatim from base.css -->
-  <link rel="stylesheet" href="evify-assets/root-vars.css">
-  <link rel="stylesheet" href="evify-assets/mini-menu.css">
+/* ============================================================================
+   BLOCK — Evify layout (identical sizing/placement) + Hemsol hover + Ampy skin
+   ============================================================================ */
+.amp3{padding-block:clamp(var(--s-8),4rem + 6vw,11rem);}
+.amp3__wrap{width:100%;max-width:117rem;margin-inline:auto;
+  padding-inline:max(var(--s-5),env(safe-area-inset-left));}
 
-  <style>
-    /* Shell / gap-fillers — the small base.css bits Evify's page supplies around the block.
-       Kept faithful to the live render (Montserrat, weights, lead styling, section rhythm). */
-    body { margin: 0; background: #fff; color: #0b1b2b; font-family: Montserrat, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    .evify-header-1 { font-weight: 600; }
-    .evify-lead { max-width: 760px; margin: 16px auto 0; color: #5a6b7b; font-size: 18px; line-height: 1.55; }
-    .py-10vh { padding-top: 10vh; padding-bottom: 10vh; }
-  </style>
+/* centred header (Evify structure) */
+.amp3__head{max-width:64rem;margin-inline:auto;text-align:center;}
+.amp3__title{font-size:var(--fs-h2);font-weight:var(--w-black);line-height:var(--lh-snug);
+  letter-spacing:var(--tr-tight);color:var(--ink);text-wrap:balance;}
+.amp3__lead{margin:var(--s-4) auto 0;max-width:52ch;font-size:var(--fs-lead);
+  font-weight:var(--w-reg);line-height:1.45;color:var(--ink-muted);text-wrap:pretty;}
+
+/* 3 equal square cards, 30px gutters (Evify), rounded 20px */
+.amp3__grid{margin-top:clamp(var(--s-7),3rem + 2vw,var(--s-8));
+  display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;}
+
+.pcard{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;
+  border-radius:var(--r-lg);background:var(--ap-navy);box-shadow:var(--shadow-card);
+  transform:translateZ(0);
+  transition:transform var(--normal,280ms) var(--ease),box-shadow var(--normal,280ms) var(--ease);}
+.pcard:hover,.pcard:focus-visible{transform:translateY(-0.4rem);box-shadow:var(--shadow-card-h);outline:0;}
+.pcard:focus-visible{box-shadow:var(--ring),var(--shadow-card-h);}
+
+/* media = photo (with a midnight-aurora fallback so a missing photo degrades gracefully).
+   The whole media layer zooms on hover — the Hemsol move. */
+.pcard__media{position:absolute;inset:0;z-index:0;overflow:hidden;
+  transform:scale(1);transition:transform 640ms var(--ease-out);will-change:transform;}
+.pcard:hover .pcard__media,.pcard:focus-visible .pcard__media{transform:scale(1.08);}
+.pcard__media img{width:100%;height:100%;object-fit:cover;}
+.pcard--elservice .pcard__media{background:
+  radial-gradient(60rem 44rem at 78% 16%,rgba(0,169,145,0.5),transparent 60%),
+  linear-gradient(180deg,#0d1350,#06082a);}
+.pcard--laddbox .pcard__media{background:
+  radial-gradient(56rem 42rem at 74% 84%,rgba(57,194,129,0.46),transparent 60%),
+  linear-gradient(180deg,#0d1145,#06082a);}
+.pcard--batteri .pcard__media{background:
+  radial-gradient(54rem 42rem at 20% 20%,rgba(0,169,145,0.44),transparent 60%),
+  linear-gradient(180deg,#0b0e38,#05061f);}
+
+/* legibility overlay for centred white text; Hemsol-style deepen on hover */
+.pcard__overlay{position:absolute;inset:0;z-index:1;
+  background:radial-gradient(125% 105% at 50% 50%,rgba(9,11,50,0.20),rgba(9,11,50,0.5));
+  transition:background 420ms var(--ease);}
+.pcard:hover .pcard__overlay,.pcard:focus-visible .pcard__overlay{
+  background:radial-gradient(125% 105% at 50% 50%,rgba(9,11,50,0.32),rgba(9,11,50,0.64));}
+
+/* centred content (Evify placement) */
+.pcard__body{position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s-5);
+  text-align:center;padding:var(--s-5);color:var(--ap-white);}
+.pcard__title{font-size:var(--fs-cardtitle);font-weight:var(--w-bold);line-height:1.05;
+  letter-spacing:var(--tr-tight);color:var(--ap-white);
+  text-shadow:0 0.1rem 2.4rem rgba(0,0,0,0.35);
+  transition:transform 220ms var(--ease-out);}
+.pcard:hover .pcard__title,.pcard:focus-visible .pcard__title{transform:translateY(-0.2rem);}
+
+/* the CTA pill — kept from Evify, recoloured to Ampy teal ("Ampy-friendly light-blue") */
+.pcard__cta{display:inline-flex;align-items:center;gap:var(--s-2);
+  padding:1.5rem 3.2rem;border-radius:var(--r-pill);
+  background:var(--ap-teal);color:var(--ap-white);
+  font-size:var(--fs-sm);font-weight:var(--w-semi);letter-spacing:0.01em;
+  box-shadow:var(--shadow-teal);
+  transition:background 200ms var(--ease),transform 200ms var(--ease-out),box-shadow 200ms var(--ease);}
+.pcard__cta svg{width:1.7rem;height:1.7rem;fill:none;stroke:currentColor;stroke-width:2.2;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:transform 200ms var(--ease-out);}
+.pcard:hover .pcard__cta,.pcard:focus-visible .pcard__cta{
+  background:var(--ap-teal-bright);transform:translateY(-0.2rem);
+  box-shadow:0 1.4rem 3rem -0.6rem rgba(28,196,175,0.6);}
+.pcard:hover .pcard__cta svg,.pcard:focus-visible .pcard__cta svg{transform:translateX(0.3rem);}
+
+/* quiet load stagger */
+@keyframes amp3-rise{from{opacity:0;transform:translateY(1.6rem);}to{opacity:1;transform:none;}}
+.rise{animation:amp3-rise 520ms var(--ease-out) both;}
+.rise.d1{animation-delay:.05s;} .rise.d2{animation-delay:.12s;}
+.rise.d3{animation-delay:.20s;} .rise.d4{animation-delay:.28s;} .rise.d5{animation-delay:.36s;}
+
+/* responsive — identical to Evify: 3-up ≥768, stacked square below */
+@media (max-width:767px){
+  .amp3__grid{grid-template-columns:1fr;gap:var(--s-5);}
+}
+@media (forced-colors:active){ .pcard:focus-visible{outline:0.2rem solid;outline-offset:0.2rem;} }
+</style>
 </head>
 <body>
 
-  <!-- ===== Evify "En leverantör, oavsett dina behov" — markup copied verbatim from evify.se ===== -->
-  <section class="container-fluid py-10vh">
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-xl-11">
+<section class="amp3" aria-labelledby="amp3-title">
+  <div class="amp3__wrap">
 
-          <div class="text-center">
-            <h2 class="evify-header-1 w-600">En leverantör, oavsett dina behov</h2>
-            <p class="evify-lead">Med över 20 000 installationer bakom oss vet vi vilka produkter och lösningar som är bäst. <br class="d-none d-xl-block">Vi tar hand om hela resan från första kontakt till installation och support.</p>
-          </div>
+    <header class="amp3__head">
+      <h2 class="amp3__title rise d1" id="amp3-title">En elfirma för hela hemmet</h2>
+      <p class="amp3__lead rise d2">Elservice, laddbox eller batterilagring. Samma behöriga elektriker hela vägen, med fast pris innan vi börjar.</p>
+    </header>
 
-          <div class="mt-5 pt-3">
-            <div class="row justify-content-center">
+    <div class="amp3__grid">
 
-              <!-- Card 1 -->
-              <div class="col-md-4 mb-4 mb-md-0">
-                <div class="product-category-container">
-                  <img src="https://evify2.s3.amazonaws.com/static/assets/img/evify-laddbox-1.jpg" width="800" height="800" loading="lazy" class="product-category-img img-fluid" alt="Laddbox Elbilsladdare">
-                  <div class="product-category-text-container">
-                    <h3 class="evify-header-2 w-600">Laddbox</h3>
-                    <div class="mt-5"><a href="/laddbox/" class="cta-box-btn">Läs mer</a></div>
-                  </div>
-                </div>
-              </div>
+      <!-- Ruta 1 — Elservice  (bild 1: det upplysta huset i skymning) -->
+      <a class="pcard pcard--elservice rise d3" href="/elservice/">
+        <span class="pcard__media"><img src="img/elservice.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        <span class="pcard__overlay"></span>
+        <span class="pcard__body">
+          <span class="pcard__title">Elservice</span>
+          <span class="pcard__cta">Läs mer <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
 
-              <!-- Card 2 -->
-              <div class="col-md-4 mb-4 mb-md-0">
-                <div class="product-category-container">
-                  <div class="bg-overlay"></div>
-                  <img src="https://evify2.s3.amazonaws.com/static/assets/img/evify-solceller-1.jpg" width="800" height="800" loading="lazy" class="product-category-img img-fluid" alt="Solceller Villa">
-                  <div class="product-category-text-container">
-                    <h3 class="evify-header-2 w-600">Solceller</h3>
-                    <div class="mt-5"><a href="/solceller/" class="cta-box-btn">Läs mer</a></div>
-                  </div>
-                </div>
-              </div>
+      <!-- Ruta 2 — Laddbox  (bild 3: laddaren på träpanelen) -->
+      <a class="pcard pcard--laddbox rise d4" href="/laddboxar/">
+        <span class="pcard__media"><img src="img/laddbox.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        <span class="pcard__overlay"></span>
+        <span class="pcard__body">
+          <span class="pcard__title">Laddbox</span>
+          <span class="pcard__cta">Läs mer <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
 
-              <!-- Card 3 -->
-              <div class="col-md-4 mb-4 mb-md-0">
-                <div class="product-category-container">
-                  <div class="bg-overlay"></div>
-                  <img src="https://evify2.s3.amazonaws.com/static/assets/img/evify-batteri-1.jpg" width="800" height="800" loading="lazy" class="product-category-img img-fluid" alt="Solcellsbatteri Villa">
-                  <div class="product-category-text-container">
-                    <h3 class="evify-header-2 w-600">Batteri</h3>
-                    <div class="mt-5"><a href="/solcellsbatteri/" class="cta-box-btn">Läs mer</a></div>
-                  </div>
-                </div>
-              </div>
+      <!-- Ruta 3 — Batterilagring  (bild 2: trähuset med solceller) -->
+      <a class="pcard pcard--batteri rise d5" href="/batterilagring/">
+        <span class="pcard__media"><img src="img/batterilagring.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        <span class="pcard__overlay"></span>
+        <span class="pcard__body">
+          <span class="pcard__title">Batterilagring</span>
+          <span class="pcard__cta">Läs mer <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
 
-            </div>
-          </div>
-
-        </div>
-      </div>
     </div>
-  </section>
+  </div>
+</section>
 
 </body>
 </html>

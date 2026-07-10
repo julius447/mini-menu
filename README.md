@@ -1,47 +1,47 @@
-# Ampy — "En leverantör" (block 2)
+# Ampy — "En elfirma för hela hemmet" (block 2)
 
-Homepage product-picker + **conversion engine** for warm/returning visitors. **Evify layout** ×
-**Hemsol interaction** × **Ampy quality**, elevated by a 6-designer critique panel into an asymmetric,
-material, converting block.
+Homepage product picker: **Evify's exact layout** (centred heading + 3 equal square cards, same sizing,
+placement and 30px gutters, identical on mobile) with **Hemsol's hover** (whole card is a link; on hover
+the photo zooms, the overlay deepens, the CTA lifts) — dressed in **Ampy** skin (Outfit, teal CTA, candour
+voice).
 
 ## Live preview
-- **The Ampy block:** [`index.html`](index.html) → https://julius447.github.io/mini-menu/
+- **This version:** [`index.html`](index.html) → https://julius447.github.io/mini-menu/
 - **1:1 Evify reference clone:** [`evify-clone.html`](evify-clone.html)
-- **Earlier Ampy versions:** [`prototype.html`](prototype.html) (v1 glass), git history (v2 midnight tiles)
+- **Earlier explorations:** [`masterpiece.html`](masterpiece.html) (asymmetric conversion block), `prototype.html`
 
-## What makes it a masterpiece + conversion engine
-- **Asymmetric hierarchy** — Elservice leads as a large hero tile, Laddbox + Batteri stack beside it.
-  The layout encodes the commercial priority (service > laddbox > battery), so the eye has a focal path.
-- **Premium material** — the midnight plates carry real depth: overhead light-gradient, corner vignette,
-  fine grain (kills banding), a top rim-light hairline, a grounded navy shadow, teal temperature between
-  the three. They read as designed art-plates, not empty placeholders.
-- **Signature motion** — a teal glow that tracks the cursor across each tile (pointer-driven, rAF-throttled,
-  disabled under reduced-motion & touch), plus the media zoom, scrim-deepen, and the arrow-chip that grows
-  into a white "Se … →" pill. One wow, done well — no 3D tilt, no idle animation, no bounce.
-- **Conversion band** — below the trio: *"Osäker på vad du behöver? Beskriv jobbet, så återkommer en behörig
-  elektriker med ett fast pris."* + **Få offert** (primary) + **Ring 010-265 79 79**. The undecided warm
-  visitor now has a committing next step, not just three lateral doors.
-- **Honest trust row** — behöriga egna elektriker · fast pris innan vi börjar · ROT draget direkt · svar
-  oftast inom en arbetsdag. All provenance-backed; the candour-clean substitute for the banned "20 000
-  installationer / 5.0" proof.
-- **Type** — teal eyebrow, display leading 1.06, `text-wrap:balance`, tile sub-lines, tuned tracking.
-- **Mobile** — hero stays largest; the CTA pill is **persistent** (never hover-gated); backdrop-blur and
-  `will-change` dropped on touch; safe-area padding; lighter title wrap.
-- **A11y** — semantic `<ul>/<li>`, whole-tile links, focus parity with hover, AA contrast, forced-colors
-  outline, reduced-motion safe.
+## Cards (order → URL → photo)
+| # | Card | URL | Photo file |
+|---|---|---|---|
+| 1 | **Elservice** | `/elservice/` | `img/elservice.jpg` |
+| 2 | **Laddbox** | `/laddboxar/` | `img/laddbox.jpg` |
+| 3 | **Batterilagring** | `/batterilagring/` | `img/batterilagring.jpg` |
 
-## Candour gate (held)
-No "20 000 installationer", no "är bäst", no ratings, no urgency/scarcity, no invented numbers, no "hela
-Sverige". Teal is the only accent; green/mint live only in the aurora. Battery copy is self-consumption /
-"vi räknar hederligt" — survives stödtjänster=0 AND effektavgift=0.
+## ⚠️ Photos — you must add three files
+The cards reference `img/elservice.jpg`, `img/laddbox.jpg`, `img/batterilagring.jpg`. Until they exist,
+each card shows a graceful **midnight-aurora fallback** (no broken-image icon — the `<img>` hides itself on
+error). Save the three photos with these exact names, mapping:
+- **Elservice** ← the lit house at dusk (image 1) → `img/elservice.jpg`
+- **Laddbox** ← the EV charger on wood cladding (image 3) → `img/laddbox.jpg`
+- **Batterilagring** ← the wooden house with roof solar (image 2) → `img/batterilagring.jpg`
+Any aspect ratio works (`object-fit: cover`); ~1000px+ square or landscape is ideal.
 
-## Open `[GAP]` before go-live
-1. **Photos.** Tiles use on-brand midnight-aurora plates as placeholders (the `.tile__media` span). Supply
-   three rights-cleared photos (elservice / laddbox / batteri); swap the span for `<img class="tile__media">`
-   — the zoom, scrim, and glow already work.
-2. **URLs:** `/offert/` (confirm the offert route), `/elservice/`, `/laddboxar/` (live is `/laddbox/`),
-   `/batterilagring/` (or `/solcellsbatterier/`). Phone `010-265 79 79` is verified [FACT].
-3. **Copy sign-off:** eyebrow "Hela hemmets el", header, tile sub-lines, trust row, and the CTA-band line.
-4. **Instrumentation** (optional): consent-gated funnel `block_view → tile_select → cta_click → lead`.
+## Copy (copywriting panel → 2 of 3 converged)
+- **Heading:** En elfirma för hela hemmet
+- **Lead:** Elservice, laddbox eller batterilagring. Samma behöriga elektriker hela vägen, med fast pris
+  innan vi börjar.
+- Candour-clean: no borrowed "20 000 installationer", no "bäst", no invented numbers, no urgency.
 
-*Reference studied: `Picasso/components/mini-menu` (Evify + Hemsol). Ampy tokens, Ampy voice, candour gate.*
+## The "Ampy-friendly light blue" CTA
+The **Läs mer** pill uses Ampy **teal** (`#00a991`, brightening to `#1cc4af` on hover) — the palette's
+brightest, most "light-blue" accent, replacing Evify's `#4baee3`. Ampy's token set has no separate light
+blue and the design system forbids Evify blue; if you want a specific different hex, say the word.
+(White-on-teal at the 18px bold pill sits ~3:1 — AA for large text; a darker text is available if you want
+AAA.)
+
+## Open `[GAP]`
+1. The three photos (above).
+2. URLs: `/elservice/`, `/laddboxar/` (live is `/laddbox/`), `/batterilagring/` — confirm.
+3. Exact CTA colour if teal isn't the "light blue" you meant.
+
+*Reference: `Picasso/components/mini-menu` (Evify + Hemsol). Ampy tokens, Ampy voice, candour gate.*
