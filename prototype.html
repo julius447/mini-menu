@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ampy — mini-menu (block 2) · prototyp</title>
+<!-- Prototype only: production self-hosts Outfit (no Google Fonts request). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================================
+   Ampy canonical tokens (copied verbatim from ampy-design-system/reference/tokens.css)
+   ============================================================================ */
+:root{
+  --ap-navy:#090b32; --ap-navy-2:#0d1145; --ap-teal:#00a991; --ap-teal-bright:#1cc4af;
+  --ap-green:#39c281; --ap-mint:#55ff9a; --ap-offwhite:#f5f9ff; --ap-white:#ffffff;
+  --bg-page:var(--ap-offwhite); --bg-surface:var(--ap-white); --bg-subtle:#eaeff3;
+  --ink:#0f123c; --ink-muted:#565e82; --ink-faint:#8a90ac;
+  --line:rgba(15,18,60,0.10); --line-strong:rgba(15,18,60,0.16);
+  --on-dark:rgba(255,255,255,0.96); --on-dark-muted:rgba(255,255,255,0.68);
+  --on-dark-faint:rgba(255,255,255,0.52); --on-dark-line:rgba(255,255,255,0.12);
+  --on-dark-line-2:rgba(255,255,255,0.22); --on-dark-fill:rgba(255,255,255,0.05);
+  --font:"Outfit",system-ui,-apple-system,sans-serif;
+  --w-light:300; --w-reg:400; --w-med:500; --w-semi:600; --w-bold:700; --w-black:800;
+  --fs-eyebrow:clamp(1.2rem,1.1rem + 0.2vw,1.35rem);
+  --fs-sm:clamp(1.4rem,1.3rem + 0.3vw,1.6rem);
+  --fs-body:clamp(1.6rem,1.5rem + 0.4vw,1.9rem);
+  --fs-lead:clamp(1.9rem,1.7rem + 0.6vw,2.3rem);
+  --fs-h3:clamp(2.2rem,1.9rem + 0.9vw,2.8rem);
+  --fs-h2:clamp(3.0rem,2.4rem + 1.8vw,4.4rem);
+  --fs-hero:clamp(4.0rem,3.0rem + 3.2vw,6.8rem);
+  --fs-stat:clamp(3.4rem,2.6rem + 2.6vw,5.0rem);
+  --lh-tight:1.04; --lh-snug:1.18; --lh-body:1.6;
+  --tr-tight:-0.022em; --tr-eyebrow:0.16em;
+  --s-1:0.4rem; --s-2:0.8rem; --s-3:1.2rem; --s-4:1.6rem; --s-5:2.4rem;
+  --s-6:3.2rem; --s-7:4.8rem; --s-8:6.4rem; --s-9:9.6rem; --s-10:13rem;
+  --container:120rem; --measure:56rem;
+  --r-sm:0.8rem; --r-md:1.4rem; --r-lg:2.2rem; --r-xl:3.2rem; --r-pill:999rem;
+  --shadow-1:0 1px 2px rgba(15,18,60,0.06),0 1px 1px rgba(15,18,60,0.04);
+  --shadow-2:0 0.6rem 1.6rem -0.4rem rgba(15,18,60,0.10),0 0.2rem 0.6rem rgba(15,18,60,0.06);
+  --shadow-3:0 2.4rem 5rem -1rem rgba(15,18,60,0.18),0 0.8rem 1.6rem -0.6rem rgba(15,18,60,0.10);
+  --shadow-teal:0 1.2rem 3rem -0.8rem rgba(0,169,145,0.45);
+  --ring:0 0 0 0.3rem rgba(0,169,145,0.28);
+  --fast:140ms; --normal:280ms; --slow:520ms;
+  --ease:cubic-bezier(0.2,0.6,0.2,1); --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --aurora:
+    radial-gradient(90rem 50rem at 88% -12%,rgba(0,169,145,0.30),transparent 60%),
+    radial-gradient(70rem 46rem at -8% 112%,rgba(57,194,129,0.18),transparent 58%),
+    radial-gradient(50rem 40rem at 50% 130%,rgba(85,255,154,0.08),transparent 60%),
+    var(--ap-navy);
+}
+@media (prefers-reduced-motion:reduce){ *{animation:none !important; transition:none !important; scroll-behavior:auto !important;} }
+
+/* ============================================================================
+   Base
+   ============================================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:62.5%;-webkit-text-size-adjust:100%;}
+body{font-family:var(--font);font-weight:var(--w-reg);font-size:var(--fs-body);
+  line-height:var(--lh-body);color:var(--ink);background:var(--bg-page);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+svg{display:block;}
+a{color:inherit;text-decoration:none;}
+::selection{background:rgba(0,169,145,0.22);}
+.container{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:var(--s-5);}
+
+/* — compact Hero 1 strip (context only, so the continuation is visible) — */
+.hero{position:relative;overflow:hidden;background:var(--aurora);color:var(--on-dark);
+  border-radius:0 0 var(--r-xl) var(--r-xl);}
+.hero__inner{position:relative;z-index:1;padding-block:clamp(5rem,3rem + 6vw,8rem);}
+.eyebrow{display:inline-flex;align-items:center;gap:var(--s-2);font-size:var(--fs-eyebrow);
+  font-weight:var(--w-semi);letter-spacing:var(--tr-eyebrow);text-transform:uppercase;color:var(--ap-teal);}
+.eyebrow::before{content:"";width:2.4rem;height:0.2rem;border-radius:2px;background:var(--ap-teal);}
+.hero .eyebrow{color:var(--ap-mint);}
+.hero .eyebrow::before{background:var(--ap-mint);}
+.h-hero{font-size:clamp(3.2rem,2.4rem + 2.4vw,5.2rem);font-weight:var(--w-black);
+  line-height:var(--lh-tight);letter-spacing:var(--tr-tight);max-width:22ch;margin-top:var(--s-4);}
+.hero .lead{font-size:var(--fs-lead);font-weight:var(--w-light);line-height:1.45;
+  color:var(--on-dark-muted);max-width:52ch;margin-top:var(--s-4);}
+
+/* ============================================================================
+   BLOCK 2 — the mini-menu (product picker)
+   ============================================================================ */
+.mm{padding-block:clamp(var(--s-8),4rem + 4vw,9rem);background:var(--bg-page);}
+
+.mm__head{max-width:60rem;}
+.mm__eyebrow{color:var(--ap-teal);}
+.mm__eyebrow::before{background:var(--ap-teal);}
+.mm__title{font-size:var(--fs-h2);font-weight:var(--w-black);line-height:var(--lh-snug);
+  letter-spacing:var(--tr-tight);color:var(--ink);margin-top:var(--s-4);max-width:20ch;}
+.mm__lead{font-size:var(--fs-lead);font-weight:var(--w-light);line-height:1.45;
+  color:var(--ink-muted);margin-top:var(--s-4);max-width:52ch;}
+
+.mm__grid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);
+  gap:var(--s-5);margin-top:var(--s-8);}
+.mm__grid > li{display:flex;}
+
+/* — the glass card (whole card is the link) — */
+.mm-card{position:relative;width:100%;display:flex;flex-direction:column;overflow:hidden;
+  background:var(--bg-surface);border:0.1rem solid var(--line);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-2);padding:clamp(var(--s-6),2rem + 1.4vw,3.6rem);
+  transition:transform var(--fast) var(--ease),box-shadow var(--normal) var(--ease),
+    border-color var(--normal) var(--ease);
+  isolation:isolate;}
+/* SIGNATURE: the teal top-edge that draws across on hover */
+.mm-card::before{content:"";position:absolute;top:0;left:0;right:0;height:0.4rem;
+  background:linear-gradient(90deg,var(--ap-teal),var(--ap-teal-bright));
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform var(--normal) var(--ease-out);border-radius:0 0 2px 2px;z-index:2;}
+.mm-card:hover,.mm-card:focus-visible{transform:translateY(-0.4rem);
+  box-shadow:var(--shadow-3),var(--shadow-teal);border-color:var(--line-strong);outline:0;}
+.mm-card:hover::before,.mm-card:focus-visible::before{transform:scaleX(1);}
+.mm-card:focus-visible{box-shadow:var(--ring),var(--shadow-3);}
+.mm-card:active{transform:translateY(-0.1rem);transition-duration:var(--fast);}
+/* forced-colors: box-shadow ring disappears — give a real outline */
+@media (forced-colors:active){
+  .mm-card:focus-visible{outline:0.2rem solid;outline-offset:0.2rem;}
+}
+
+/* — glyph tile — */
+.mm-card__glyph{display:inline-flex;align-items:center;justify-content:center;
+  width:6.4rem;height:6.4rem;border-radius:var(--r-md);color:var(--ap-teal);
+  background:rgba(0,169,145,0.10);box-shadow:inset 0 0 0 0.1rem rgba(0,169,145,0.16);
+  transition:background var(--normal) var(--ease);}
+.mm-card__glyph svg{width:3rem;height:3rem;fill:none;stroke:currentColor;
+  stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+.mm-card:hover .mm-card__glyph,.mm-card:focus-visible .mm-card__glyph{background:rgba(0,169,145,0.16);}
+
+/* — text — */
+.mm-card__title{font-size:var(--fs-h3);font-weight:var(--w-bold);line-height:var(--lh-tight);
+  letter-spacing:var(--tr-tight);color:var(--ink);margin-top:var(--s-5);}
+.mm-card__desc{font-size:var(--fs-sm);font-weight:var(--w-reg);line-height:1.5;
+  color:var(--ink-muted);margin-top:var(--s-3);max-width:32ch;}
+
+/* — link affordance (navy label for AA contrast, teal arrow) — */
+.mm-card__link{display:inline-flex;align-items:center;gap:var(--s-2);
+  margin-top:auto;padding-top:var(--s-5);
+  font-size:var(--fs-sm);font-weight:var(--w-semi);color:var(--ink);
+  transition:color var(--fast) var(--ease);}
+.mm-card__link .arrow{display:inline-flex;color:var(--ap-teal);
+  transition:transform var(--fast) var(--ease),color var(--fast) var(--ease);}
+.mm-card__link .arrow svg{width:1.8rem;height:1.8rem;fill:none;stroke:currentColor;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.mm-card:hover .mm-card__link .arrow,.mm-card:focus-visible .mm-card__link .arrow{
+  transform:translateX(0.4rem);color:var(--ap-teal-bright);}
+
+/* — quiet fade-up on load — */
+@keyframes rise{from{opacity:0;transform:translateY(1.6rem);}to{opacity:1;transform:none;}}
+.rise{animation:rise var(--slow) var(--ease-out) both;}
+.rise.d1{animation-delay:0.06s;} .rise.d2{animation-delay:0.14s;} .rise.d3{animation-delay:0.22s;} .rise.d4{animation-delay:0.30s;}
+
+/* ============================================================================
+   Responsive — elegant reflow (not just stacked full-width blocks)
+   ============================================================================ */
+@media (min-width:881px){
+  .mm-card__body{display:contents;}
+}
+@media (max-width:880px){
+  .mm__grid{grid-template-columns:1fr;gap:var(--s-4);margin-top:var(--s-7);}
+  /* stacked cards become compact horizontal rows */
+  .mm-card{flex-direction:row;align-items:flex-start;gap:var(--s-5);
+    padding:clamp(var(--s-5),1.4rem + 2vw,var(--s-6));}
+  .mm-card__glyph{flex:0 0 auto;width:5.6rem;height:5.6rem;margin-top:0.2rem;}
+  .mm-card__body{display:flex;flex-direction:column;min-width:0;}
+  .mm-card__title{font-size:var(--fs-lead);margin-top:0;}
+  .mm-card__desc{margin-top:var(--s-2);max-width:42ch;}
+  .mm-card__link{margin-top:var(--s-4);padding-top:0;}
+  /* on horizontal rows the edge draws down the left instead of across the top */
+  .mm-card::before{top:0;bottom:0;right:auto;width:0.4rem;height:auto;
+    transform:scaleY(0);transform-origin:top center;border-radius:0 2px 2px 0;}
+  .mm-card:hover::before,.mm-card:focus-visible::before{transform:scaleY(1);}
+}
+@media (max-width:420px){
+  .mm-card{flex-direction:column;align-items:flex-start;gap:0;}
+  .mm-card__title{margin-top:var(--s-5);}
+  .mm-card__desc{max-width:36ch;}
+  .mm-card__link{margin-top:var(--s-4);}
+  /* narrow vertical cards → re-assert the top-edge signature */
+  .mm-card::before{top:0;left:0;right:0;bottom:auto;width:auto;height:0.4rem;
+    transform:scaleX(0);transform-origin:left center;border-radius:0 0 2px 2px;}
+  .mm-card:hover::before,.mm-card:focus-visible::before{transform:scaleX(1);}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Compact Hero 1 (CONTEXT ONLY — shows the continuation, not part of block 2) ===== -->
+<header class="hero">
+  <div class="container">
+    <div class="hero__inner">
+      <span class="eyebrow">Auktoriserad elektriker · Stockholm</span>
+      <h1 class="h-hero">El som bara funkar. Och en elektriker som svarar.</h1>
+      <p class="lead">Behörig elektriker, fast pris innan vi börjar och ROT-avdraget draget direkt på fakturan.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ===== BLOCK 2 — the mini-menu ===== -->
+<section class="mm" aria-labelledby="mm-title">
+  <div class="container">
+
+    <div class="mm__head">
+      <span class="eyebrow mm__eyebrow rise d1">Hela hemmet</span>
+      <h2 class="mm__title rise d1" id="mm-title">Samma elektriker, oavsett vad ditt hem behöver.</h2>
+      <p class="mm__lead rise d2">Elinstallation, laddbox eller solcellsbatteri. En och samma behöriga elektriker, från första kontakt till klart.</p>
+    </div>
+
+    <ul class="mm__grid">
+
+      <!-- Card 1 — Elinstallationer -->
+      <li class="rise d2">
+        <a class="mm-card" href="/elservice/">
+          <span class="mm-card__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M13.5 3 L7 13 h4 l-1 8 7-11 h-4 z"/></svg>
+          </span>
+          <span class="mm-card__body">
+            <span class="mm-card__title">Elinstallationer</span>
+            <span class="mm-card__desc">Byte av elcentral, felsökning och nyinstallation hemma hos dig.</span>
+            <span class="mm-card__link">Se elinstallationer
+              <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </span>
+        </a>
+      </li>
+
+      <!-- Card 2 — Laddbox -->
+      <li class="rise d3">
+        <a class="mm-card" href="/laddboxar/">
+          <span class="mm-card__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M13 7 L10 12.5 h2.4 l-0.8 4.5 4-6 h-2.4 z"/></svg>
+          </span>
+          <span class="mm-card__body">
+            <span class="mm-card__title">Laddbox</span>
+            <span class="mm-card__desc">Din laddare hemma till fast pris, installerad och klar.</span>
+            <span class="mm-card__link">Se laddboxar
+              <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </span>
+        </a>
+      </li>
+
+      <!-- Card 3 — Solcellsbatteri -->
+      <li class="rise d4">
+        <a class="mm-card" href="/solcellsbatterier/">
+          <span class="mm-card__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="7" width="16" height="11" rx="2.2"/><path d="M19 10.5 h2 v4 h-2"/><path d="M10.8 9 L8 13 h2.2 l-0.7 3.4 3.4-4.4 h-2.2 z"/></svg>
+          </span>
+          <span class="mm-card__body">
+            <span class="mm-card__title">Solcellsbatteri</span>
+            <span class="mm-card__desc">Lagra din solel och använd mer av den själv.</span>
+            <span class="mm-card__link">Se solcellsbatterier
+              <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+</body>
+</html>
