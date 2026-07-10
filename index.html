@@ -46,15 +46,16 @@ img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
    BLOCK — Evify layout (identical sizing/placement) + Hemsol hover + Ampy skin
    ============================================================================ */
 .amp3{padding-block:clamp(var(--s-8),4rem + 6vw,11rem);}
-.amp3__wrap{width:100%;max-width:117rem;margin-inline:auto;
+.amp3__wrap{width:100%;max-width:132rem;margin-inline:auto;
   padding-inline:max(var(--s-5),env(safe-area-inset-left));}
 
-/* centred header (Evify structure) */
-.amp3__head{max-width:64rem;margin-inline:auto;text-align:center;}
-.amp3__title{font-size:var(--fs-h2);font-weight:var(--w-black);line-height:var(--lh-snug);
-  letter-spacing:var(--tr-tight);color:var(--ink);text-wrap:balance;}
-.amp3__lead{margin:var(--s-4) auto 0;max-width:52ch;font-size:var(--fs-lead);
-  font-weight:var(--w-reg);line-height:1.45;color:var(--ink-muted);text-wrap:pretty;}
+/* centred header (Evify structure). Type follows the style guide:
+   H2 = Outfit Medium (500) / lh 1.2, NOT Black; body = Outfit Light (300). */
+.amp3__head{max-width:62rem;margin-inline:auto;text-align:center;}
+.amp3__title{font-size:var(--fs-h2);font-weight:var(--w-med);line-height:1.2;
+  letter-spacing:-0.01em;color:var(--ink);text-wrap:balance;}
+.amp3__lead{margin:var(--s-4) auto 0;max-width:46ch;font-size:var(--fs-lead);
+  font-weight:var(--w-light);line-height:1.5;color:var(--ink-muted);text-wrap:pretty;}
 
 /* 3 equal square cards, 30px gutters (Evify), rounded 20px */
 .amp3__grid{margin-top:clamp(var(--s-7),3rem + 2vw,var(--s-8));
