@@ -14,7 +14,7 @@
   --ap-navy:#090b32; --ap-teal:#00a991; --ap-teal-bright:#1cc4af; --ap-green:#39c281; --ap-mint:#55ff9a;
   --ap-blue:#5eb1bf; --ap-blue-bright:#74c2ce;   /* Ampy sky-blue (brandbook secondary) — the CTA "ljusblå", owner-picked */
   --ap-offwhite:#f5f9ff; --ap-white:#ffffff;
-  --ink:#0f123c; --ink-muted:#565e82;
+  --ink:#0f123c; --ink-muted:#565e82; --ap-black:#1e1e1e;
   --font:"Outfit",system-ui,-apple-system,sans-serif;
   --w-light:300; --w-reg:400; --w-med:500; --w-semi:600; --w-bold:700; --w-black:800;
   --fs-sm:clamp(1.4rem,1.3rem + 0.3vw,1.6rem);
@@ -104,7 +104,7 @@ img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
 /* the CTA pill — kept from Evify, recoloured to Ampy teal ("Ampy-friendly light-blue") */
 .pcard__cta{display:inline-flex;align-items:center;gap:var(--s-2);
   padding:1.5rem 3.2rem;border-radius:var(--r-pill);
-  background:var(--ap-blue);color:var(--ap-navy);
+  background:var(--ap-blue);color:var(--ap-black);
   font-size:var(--fs-sm);font-weight:var(--w-bold);letter-spacing:0.01em;
   box-shadow:var(--shadow-blue);
   transition:background 200ms var(--ease),transform 200ms var(--ease-out),box-shadow 200ms var(--ease);}
@@ -135,8 +135,8 @@ img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
   <div class="amp3__wrap">
 
     <header class="amp3__head">
-      <h2 class="amp3__title rise d1" id="amp3-title">En elfirma för hela hemmet</h2>
-      <p class="amp3__lead rise d2">Elservice, laddbox eller batterilagring. Samma behöriga elektriker hela vägen, med fast pris innan vi börjar.</p>
+      <h2 class="amp3__title rise d1" id="amp3-title">Din elektriker för hela hemmet</h2>
+      <p class="amp3__lead rise d2">Med över 3000 installationer per år hjälper vi dig med elinstallationer, laddbox och batterilagring, allt under ett och samma tak.</p>
     </header>
 
     <div class="amp3__grid">
