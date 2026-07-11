@@ -19,9 +19,9 @@
   --w-light:300; --w-reg:400; --w-med:500; --w-semi:600; --w-bold:700; --w-black:800;
   --fs-sm:clamp(1.4rem,1.3rem + 0.3vw,1.6rem);
   --fs-body:clamp(1.6rem,1.5rem + 0.4vw,1.9rem);
-  --fs-lead:clamp(1.9rem,1.7rem + 0.6vw,2.3rem);
+  --fs-lead:clamp(1.7rem,1.62rem + 0.25vw,1.85rem);   /* style guide --aptext-m (17->18.5px) */
   --fs-cardtitle:clamp(2.2rem,1.8rem + 1vw,3rem);
-  --fs-h2:clamp(3.0rem,2.4rem + 1.8vw,4.2rem);
+  --fs-h2:clamp(2.8rem,2.3rem + 1.1vw,3.8rem);         /* a smidge smaller, guide-scale H2 wt500/lh1.2 */
   --lh-snug:1.14; --tr-tight:-0.022em;
   --s-2:0.8rem; --s-3:1.2rem; --s-4:1.6rem; --s-5:2.4rem; --s-6:3.2rem; --s-7:4.8rem; --s-8:6.4rem;
   --r-lg:2rem; --r-pill:999rem;
@@ -51,10 +51,11 @@ img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
 
 /* centred header (Evify structure). Type follows the style guide:
    H2 = Outfit Medium (500) / lh 1.2, NOT Black; body = Outfit Light (300). */
-.amp3__head{max-width:62rem;margin-inline:auto;text-align:center;}
-.amp3__title{font-size:var(--fs-h2);font-weight:var(--w-med);line-height:1.2;
+.amp3__head{max-width:96rem;margin-inline:auto;text-align:center;}
+.amp3__title{max-width:40rem;margin-inline:auto;font-size:var(--fs-h2);font-weight:var(--w-med);line-height:1.2;
   letter-spacing:-0.01em;color:var(--ink);text-wrap:balance;}
-.amp3__lead{margin:var(--s-4) auto 0;max-width:46ch;font-size:var(--fs-lead);
+/* lead is deliberately WIDER than the title (2 lines, not 3) */
+.amp3__lead{margin:var(--s-5) auto 0;max-width:58rem;font-size:var(--fs-lead);
   font-weight:var(--w-light);line-height:1.5;color:var(--ink-muted);text-wrap:pretty;}
 
 /* 3 equal square cards, 30px gutters (Evify), rounded 20px */
@@ -86,7 +87,7 @@ img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
 
 /* legibility overlay for centred white text; Hemsol-style deepen on hover */
 .pcard__overlay{position:absolute;inset:0;z-index:1;
-  background:radial-gradient(125% 105% at 50% 50%,rgba(9,11,50,0.20),rgba(9,11,50,0.5));
+  background:radial-gradient(125% 105% at 50% 50%,rgba(9,11,50,0.32),rgba(9,11,50,0.58));
   transition:background 420ms var(--ease);}
 .pcard:hover .pcard__overlay,.pcard:focus-visible .pcard__overlay{
   background:radial-gradient(125% 105% at 50% 50%,rgba(9,11,50,0.32),rgba(9,11,50,0.64));}
@@ -124,7 +125,10 @@ img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
 
 /* responsive — identical to Evify: 3-up ≥768, stacked square below */
 @media (max-width:767px){
-  .amp3__grid{grid-template-columns:1fr;gap:var(--s-5);}
+  /* single column, but CAP the card width so a full-width square never explodes into
+     a giant tile on large phones / small tablets (that was the mobile break) */
+  .amp3__grid{grid-template-columns:1fr;gap:var(--s-5);max-width:44rem;margin-inline:auto;}
+  .pcard__cta{padding:1.4rem 2.8rem;}
 }
 @media (forced-colors:active){ .pcard:focus-visible{outline:0.2rem solid;outline-offset:0.2rem;} }
 </style>
