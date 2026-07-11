@@ -52,7 +52,8 @@ img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
 /* centred header (Evify structure). Type follows the style guide:
    H2 = Outfit Medium (500) / lh 1.2, NOT Black; body = Outfit Light (300). */
 .amp3__head{max-width:96rem;margin-inline:auto;text-align:center;}
-.amp3__title{max-width:40rem;margin-inline:auto;font-size:var(--fs-h2);font-weight:var(--w-med);line-height:1.2;
+/* wide enough to stay on ONE line on desktop; still wraps safely on phones (viewport < text) */
+.amp3__title{max-width:60rem;margin-inline:auto;font-size:var(--fs-h2);font-weight:var(--w-med);line-height:1.2;
   letter-spacing:-0.01em;color:var(--ink);text-wrap:balance;}
 /* lead is deliberately WIDER than the title (2 lines, not 3) */
 .amp3__lead{margin:var(--s-5) auto 0;max-width:58rem;font-size:var(--fs-lead);
